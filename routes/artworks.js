@@ -2,6 +2,8 @@ const express = require('express');
 const Artwork = require('../models/artwork');
 // const TYPES = require('..models/artwork-types');
 const router = express.Router();
+var multer  = require('multer');
+var upload = multer({ dest: './public/uploads/' });
 const { ensureLoggedIn } = require('connect-ensure-login');
 
 router.get('/new', (req, res) => {
@@ -9,12 +11,14 @@ router.get('/new', (req, res) => {
     // res.send("test");
 });
 
-router.post('/artworks', ensureLoggedIn('/login'), (req, res, next) => {
+router.post('/artworks', upload.single('photo'),ensureLoggedIn('/login'), (req, res, next) => {
     const newArtwork = new Artwork ({
         title: req.body.title,
         description: req.body.description,
         category: req.body.category,
-        _creator: req.user._id
+        _creator: req.user._id,
+        picturePath: `/uploads/${req.file.filename}`,
+        originalName: req.file.originalName
     });
     newArtwork.save( (err) => {
         if (err) {
@@ -25,46 +29,59 @@ router.post('/artworks', ensureLoggedIn('/login'), (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/artwork/:id', (req, res, next) => {
     Artwork.findById(req.params.id, (err, artwork) => {
       if (err){ 
           return next(err); 
         }
-    //   artwork.populate('_creator', (err, artwork) => {
-    //     if (err){ return next(err); }
+      artwork.populate('_creator', (err, artwork) => {
+        if (err){ return next(err); }
         return res.render('artwork/show', { artwork });
       });
     });
-//   });
+});
 
-router.get('/:id/edit', ensureLoggedIn('/login'), (req, res, next) => {
-    Artwork.findById(req.params.id, (err, campaign) => {
+router.get('/artwork/:id/edit', ensureLoggedIn('/login'), (req, res, next) => {
+    Artwork.findById(req.params.id, (err, artwork) => {
         if (err) {return next(err)}
         if (!artwork) {return next(new Error("404")) }
-        return res.render('artworks/edit', {artwork, types: TYPES})
+        return res.render('artwork/edit', { artwork: artwork })
     });
 });
 
-router.post('/:id', ensureLoggedIn('/login'), (req, res, next) => {
+router.post('/artwork/:id', upload.single('photo'), ensureLoggedIn('/login'), (req, res, next) => {
     const updates = {
         title: req.body.title,
         description: req.body.description,
-        category:req.body.category
+        category:req.body.category ,
+        picturePath: `/uploads/${req.file.filename}`,
+        originalName: req.file.originalName
     };
 
-    Artwork.findByIdAndUpdate(req.params.id, updates, (err, campaign) => {
-        if (err) {
-            return res.render('artworks/edit', {
-                artwork,
-                errors: campaign.errors
-         });
-        }
-        if (!artwork) {
+    Artwork.findByIdAndUpdate(req.params.id, updates, (err, artwork) => {
+        if (err) { 
+            return res.render('artworks/edit', { artwork, errors: artwork.errors });
+        } else if (!artwork) { 
             return next(new Error('404'));
+        } else {
+            return res.redirect(`/artwork/${artwork._id}`);
+            // res.send("meow");
         }
-        return res.redirect(`/artworks/${artwork._id}`);
     })
 });
+
+router.post('/artwork/:id/delete', function(req, res, next) {
+    Artwork.findOne({ _id: req.params.id }, (err, artwork) => {
+      if (err) { return next(err); }
+  
+      newArtwork.remove((err) => {
+        if (err) { return next(err); }
+  
+        res.redirect('/');
+      });
+    });
+  });
+  
 
 
 

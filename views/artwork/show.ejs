@@ -7,6 +7,10 @@
             <h1><%= artwork.title %></h1>
             <h2 class="artwork-category"><%= artwork.category %></h2>
             <p class="artwork-description"><%= artwork.description %></p>
+            <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
+            <a href="/artwork/<%= artwork._id %>/edit">
+              Edit
+            </a>
           </div>
         </div>
 </div>

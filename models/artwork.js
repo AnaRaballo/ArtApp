@@ -6,7 +6,10 @@ const ArtworkSchema = new Schema({
     title         : { type: String, required: true },
     description   : { type: String, required: true },
     category      : { type: String, enum: TYPES, required: false },
-    _creator      : { type: Schema.Types.ObjectId, ref: 'User', required: true }
+    _creator      : { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    picturePath   : { type: String},
+    originalName  : { type: String} 
 });
 
-module.exports = mongoose.model('Artwork', ArtworkSchema);
+var Artwork = mongoose.model('Artwork', ArtworkSchema);
+module.exports = Artwork;

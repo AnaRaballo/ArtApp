@@ -1,7 +1,7 @@
 <div class="container">
         <div class="row">
           <div class="col-sm-6 centered-form">
-            <form action="/artworks/<%= artwork._id %>" method="post">
+            <form action="/artwork/<%= artwork._id %>" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" class="form-control" value="<%= artwork.title %>">
@@ -15,25 +15,11 @@
                   <%= artwork.description %>
                 </textarea>
               </div>
-              <div class="form-group">
-                <label for="category">Category</label><br>
-                <select name="category" id="category">
-                  <% types.forEach((category) => { %>
-                  <!-- This selects the artwork's category in the dropdown -->
-                    <% if (category === artwork.category) { %>
-                      <option
-                        selected
-                        type="text"
-                        value="<%= category %>"
-                        class="form-control">
-                      <%= category %>
-                      </option>
-                    <% } else { %>
-                      <option type="text" value="<%= category %>" class="form-control"><%= category %></option>
-                    <% } %>
-                  <%  }) %>
-                </select>
-              </div>
+              <section>
+                  <p>Upload your photo</p>
+                    <input type="file" name="photo">
+                </section>
+                <br>
               <div class="form-group">
                 <button type="submit">Update Gallery</button>
               </div>
