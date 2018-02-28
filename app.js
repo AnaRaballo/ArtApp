@@ -109,11 +109,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Authentication Configuration
+// app.use( (req,res,next) => {
+//   if (typeof(req.user) !== "undefined"){
+//     res.locals.userSignedIn = true;
+//   } else {
+//     res.locals.userSignedIn = false;
+//   }
+//   next();
+// })
+
 app.use( (req,res,next) => {
-  if (typeof(req.user) !== "undefined"){
-    res.locals.userSignedIn = true;
-  } else {
-    res.locals.userSignedIn = false;
+  if (req.user){
+    res.locals.user = req.user;
   }
   next();
 })

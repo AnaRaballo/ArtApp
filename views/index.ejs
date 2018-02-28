@@ -12,7 +12,7 @@
       <h3 class="text-center">You may be interested in...</h3>
       <% artworks.forEach((artwork) => { %>
         <div class="col-sm-3 home-artwork-box">
-          <img src="<%= artwork.image %>">
+          <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>">
           <div class="artwork-info-wrapper">
             <a class="title" href="/artworks/<%= artwork._id %>">
               <strong><%= artwork.title %></strong>
