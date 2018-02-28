@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2><%= description %></h2>
+
+    <ul>
+      <% artwork.forEach( (artwork) => { %>
+        <li>
+          <a href="/artwork/<%= artwork._id %>">
+            <%= artwork.title %>
+          </a>
+          - <%= artwork.description %>
+          <a href="/artwork/<%= artwork._id %>/edit">
+            <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
+            Edit
+          </a>
+          <a href="/artwork/<%= artwork._id %>/delete">
+            Delete
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+
+    <a href = "/new">
+      Click here to add a new artwork
+    </a>
+  </body>
+</html>
+
+

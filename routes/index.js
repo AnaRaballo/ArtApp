@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   .exec((err, artworks) => {
   res.render('index', { artworks });
   });
+  // res.send("hello");
 });
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const User = require('../models/user');
 const router = express.Router();
 
 const{ ensureLoggedIn, ensureLoggedOut} = require('connect-ensure-login');
@@ -26,5 +27,15 @@ router.post('/logout', ensureLoggedIn('/login'), (req, res) => {
     req.logout();
     res.redirect('/');
 });
+
+router.get('/:id/edit', ensureLoggedIn('/login'), (req, res, next) => {
+    User.findById(req.params.id, (err, user) => {
+        if (err) {return next(err)}
+        if (!user) {return next(new Error("404")) }
+        return res.render('user/edit', {user: user})
+    });
+});
+
+
 
 module.exports = router;

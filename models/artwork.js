@@ -11,5 +11,9 @@ const ArtworkSchema = new Schema({
     originalName  : { type: String} 
 });
 
+// ArtworkSchema.methods.belongsTo = function(user){
+//     return this._creator.equals(user._id)
+// }
+
 var Artwork = mongoose.model('Artwork', ArtworkSchema);
 module.exports = Artwork;
