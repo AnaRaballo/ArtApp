@@ -3,7 +3,6 @@
       <div class="home-heading-wrapper">
         <h1>Art</h1>
         <p>Buy and Sell</p>
-        <a class="btn btn-default" href="/signup">Here</a>
       </div>
     </div>
   </div>
@@ -14,10 +13,10 @@
         <div class="col-sm-3 home-artwork-box">
           <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>">
           <div class="artwork-info-wrapper">
-            <a class="title" href="/artworks/<%= artwork._id %>">
+            <a class="title" href="/artwork/<%= artwork._id %>">
               <strong><%= artwork.title %></strong>
             </a><br>
-            by <span class="light-text"><%= artwork._creator %></span>
+            by <span class="light-text"><%= artwork._creator.username %></span>
             <span class="light-text description"><%= artwork.description %></span>
           </div>
         </div>
