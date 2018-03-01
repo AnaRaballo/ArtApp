@@ -28,14 +28,50 @@ router.post('/logout', ensureLoggedIn('/login'), (req, res) => {
     res.redirect('/');
 });
 
-router.get('/:id/edit', ensureLoggedIn('/login'), (req, res, next) => {
+router.get("/user/:id/edit-user", ensureLoggedIn("/login"), (req, res, next) => {
     User.findById(req.params.id, (err, user) => {
         if (err) {return next(err)}
         if (!user) {return next(new Error("404")) }
-        return res.render('user/edit', {user: user})
+        return res.render('authentication/edit-user', {user : user})
     });
 });
 
+router.post('/user/:id', ensureLoggedIn('/login'), (req, res, next) => {
+    const updateUser = {
+        username: req.body.username,
+        email: req.body.email,
+        description: req.body.description,
+        password: req.body.password
+    };
+
+    User.findByIdAndUpdate(req.params.id, updateUser, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.render('authentication/edit-user', {user, errors: user.errors});
+        } else if (!user) {
+            console.log(err);
+            return next(new Error('404'));
+        } 
+        else {
+            return res.redirect('/artworks');
+        }
+    })
+});
+
+//Delete user
+router.get('/user/:id/delete', function(req, res, next) {
+    User.findOne({ _id: req.params.id }, (err, user) => {
+      if (err) { return next(err); }
+  
+      user.remove((err) => {
+        if (err) { return next(err); }
+  
+        //change when display works
+        res.redirect('/');
+      });
+    });
+  });
+  
 
 
 module.exports = router;

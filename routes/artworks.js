@@ -62,6 +62,7 @@ router.get('/artwork/:id/edit', ensureLoggedIn('/login'), (req, res, next) => {
     Artwork.findById(req.params.id, (err, artwork) => {
         if (err) {return next(err)}
         if (!artwork) {return next(new Error("404")) }
+        // if (!artwork) {return next()}
         return res.render('artwork/edit', { artwork: artwork })
     });
 });
@@ -71,10 +72,12 @@ router.post('/artwork/:id', upload.single('photo'), ensureLoggedIn('/login'), (r
     const updates = {
         title: req.body.title,
         description: req.body.description,
-        category:req.body.category ,
-        picturePath: `/uploads/${req.file.filename}`,
-        originalName: req.file.originalName
+        category:req.body.category
     };
+    if(req.file){
+        updates.picturePath = `/uploads/${req.file.filename}`;
+        updates.originalName = req.file.originalName;
+    }
 
     Artwork.findByIdAndUpdate(req.params.id, updates, (err, artwork) => {
         if (err) { 
@@ -83,7 +86,6 @@ router.post('/artwork/:id', upload.single('photo'), ensureLoggedIn('/login'), (r
             return next(new Error('404'));
         } else {
             return res.redirect(`/artwork/${artwork._id}`);
-            // res.send("meow");
         }
     })
 });

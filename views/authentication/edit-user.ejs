@@ -1,0 +1,33 @@
+<div class="container">
+        <div class="row">
+          <div class="col-sm-6 centered-form">
+            <form action="/user/<%= user._id %>" method="post">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" value="<%= user.username%>">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" value="<%= user.email%>">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea 
+                id="description"
+                name="description" 
+                class="form-control">
+                <%= user.description%>
+                </textarea>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" value="<%= user.password%>">
+              </div>
+      
+              <button type="submit">Save Changes</button>
+              <br>
+              <a href="/user/<%= user._id%>/delete"> Delete User</a>
+            </form>
+          </div>
+        </div>
+      </div>
