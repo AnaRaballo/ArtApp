@@ -6,7 +6,7 @@ const Artwork = require('../models/artwork');
 router.get('/', function(req, res, next) {
   Artwork
   .find({})
-  // .populate('_creator')
+  .populate('_creator')
   .exec((err, artworks) => {
   res.render('index', { artworks });
   });
