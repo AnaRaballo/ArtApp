@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+require("dotenv").config();
 
 // Configure Express Layouts / Mongoose
 const expressLayouts = require ('express-ejs-layouts');
@@ -19,7 +20,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const User          = require('./models/user');
 const bcrypt        = require('bcrypt');
 
-mongoose.connect('mongodb://localhost:27017/artwork-data');
+// mongoose.connect('mongodb://localhost:27017/artwork-data');
+// mongoose.connect("mongodb://localhost/artbook-");
+mongoose.connect(process.env.MONGODB_URI);
 
 const index = require('./routes/index');
 const users = require('./routes/users');
