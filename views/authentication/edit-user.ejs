@@ -1,5 +1,5 @@
 <div class="container">
-        <div class="row">
+        <div class="edit-user-row">
           <div class="col-sm-6 centered-form">
             <form action="/user/<%= user._id %>" method="post">
               <div class="form-group">
@@ -12,21 +12,17 @@
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea 
-                id="description"
-                name="description" 
-                class="form-control">
-                <%= user.description%>
-                </textarea>
+                <textarea id="description" name="description" class="form-control"> <%= user.description%> </textarea>
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" class="form-control" value="<%= user.password%>">
               </div>
       
-              <button type="submit">Save Changes</button>
+              <button class= "edit-profile-button" type="submit">Save Changes</button>
               <br>
-              <a href="/user/<%= user._id%>/delete"> Delete User</a>
+            <br>
+              <a class= "delete-user" href="/user/<%= user._id%>/delete"> Delete User</a>
             </form>
           </div>
         </div>

@@ -245,6 +245,23 @@ progress {
   border-radius: 20px;
 } 
 
+.edit-user-row {
+  background: #41ba87;
+  box-shadow: 0px 20px 20px #626369;
+  height: 450px;
+  border-radius: 25px;
+}
+
+.edit-profile-button{
+  font-family: "Britannic Bold";
+  background-color: white;
+  color: black;
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 20px;
+  border-radius: 20px;
+} 
+
 .col-sm-2{
   font-family: "Britannic Bold";
   font-size: 20px;
@@ -275,15 +292,6 @@ progress {
   font-family: "Britannic Bold";
 }
 
-.profile-info {
-  /* margin-left: 0 auto; */
-  /* text-align: center; */
- /* background: #00B7FF; */
- /* width: 30%; */
- /* border-radius: 25px; */
- /* padding: 10px 10px;  */
-}
-
 .profile-description{
   font-size: 18px;
 }
@@ -302,4 +310,8 @@ padding: 10 px 10px;
 
 ul#artwork {
   list-style-type: none;
+  }
+
+  .delete-user{
+    color: white;
   }
