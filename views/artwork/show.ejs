@@ -1,24 +1,28 @@
-<div class="container artwork-container">
+<div class="container artwork-container container-fluid">
         <div class="row">
           <div class="col-sm-2">
             By: <strong><%= artwork._creator.username %></strong>
           </div>
+          <br>
           <div class="col-sm-10">
-            <h1><%= artwork.title %></h1>
-            <h2 class="artwork-category"><%= artwork.category %></h2>
+            <h1 class= "art-title" ><%= artwork.title %></h1>
+            <!-- <h2 class="artwork-category"><%= artwork.category %></h2> -->
             <p class="artwork-description"><%= artwork.description %></p>
-            <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
-            <a href="/artwork/<%= artwork._id %>/edit">
-              Edit
-            </a>
+            <img class="artwork-image" src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
             <br>
-            <a href="/artwork/<%= artwork._id %>/delete">
-              Delete
-            </a>
-            <br>
-            <a href="/artworks">
-              Return to Gallery
-            </a>
+          
           </div>
+          <a class = "ref-artwork" href="/artwork/<%= artwork._id %>/edit">
+            Edit
+          </a>
+          <br>
+          <a class = "ref-artwork" href="/artwork/<%= artwork._id %>/delete">
+            Delete
+          </a>
+          <br>
+          <a class = "ref-artwork" href="/artworks">
+            Return to Gallery
+          </a>
+        
         </div>
 </div>

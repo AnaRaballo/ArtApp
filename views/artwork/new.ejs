@@ -1,5 +1,5 @@
 <div class="container">
-        <div class="row">
+        <div class="new-row">
           <div class="col-sm-6 centered-form">
             <form action="/artworks" method="post" enctype="multipart/form-data">
               <div class="form-group">
@@ -10,19 +10,21 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control"></textarea>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="category">Category</label><br>
                 <select name="category" id="category"></select>
-              </div>
-              <section>
-                  <p>Upload your photo</p>
-                    <input type="file" name="photo">
+              </div> -->
+              <section class ="form-group">
+                  <p>Upload your artwork</p>
+                    <input type="file" name="photo" class="button-upload">
                 </section>
-                <br>
+                
               <div class="form-group">
-                <button type="submit">Create Artwork</button>
+                <button type="submit" class="button-new">Create Artwork</button>
               </div>
             </form>
           </div>
         </div>
       </div>
+
+

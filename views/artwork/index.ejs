@@ -3,21 +3,34 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <h2><%= description %></h2>
-    <a href= "/user/<%= user._id %>/edit-user"> Edit Profile</a>
+  <body class="profile">
+<div class= "profile-info">
 
-    <ul>
+  <h1 class ="profile-title"><%= title %></h1>
+  <p class ="profile-description"><%= description %></p>
+  <br>
+  <a class ="profile-edit" href= "/user/<%= user._id %>/edit-user"> Edit Profile</a>
+ <br>
+  <a href = "/new">
+      Click here to add a new artwork
+    </a>
+  </div>
+<br>
+    <ul id= "artwork" class = "profile-artwork">
       <% artwork.forEach( (artwork) => { %>
         <% if(user._id.equals(artwork._creator)){  %>
-        <li>
-          <a href="/artwork/<%= artwork._id %>">
+          <li>
+            <br>
+          <a class = "artwork-title" href="/artwork/<%= artwork._id %>">
             <%= artwork.title %>
           </a>
-          - <%= artwork.description %>
+          <br>
+          <%= artwork.description %>
+          <br>
+          <li>
           <a href="/artwork/<%= artwork._id %>/edit">
-            <img src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
+            <img class= "profile-image" src="<%= artwork.picturePath %>" alt="<%= artwork.originalName %>" />
+          </li>
             Edit
           </a>
           <a href="/artwork/<%= artwork._id %>/delete">
@@ -29,9 +42,7 @@
     </ul>
    
 
-    <a href = "/new">
-      Click here to add a new artwork
-    </a>
+   
   </body>
 </html>
 
