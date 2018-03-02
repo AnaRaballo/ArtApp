@@ -273,12 +273,13 @@ progress {
   font-size: 20px;
   font-family: "Britannic Bold";
   border-style: solid;
+  border-color: #41ba87;
   padding: 20px 20px;
 }
 
 .artwork-image{
-  width: 100%;
-  height: 100%;
+  width: 40%;
+  height: 40%;
 }
 
 .ref-artwork{
